@@ -36,6 +36,10 @@
             color: white;
             padding: 10px;
             border-radius: 5px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
         }
         #floatingElement {
             background-color: #8e44ad;
@@ -44,6 +48,9 @@
             border-radius: 5px;
             position: absolute;
             display: none; /* Controlled by JS */
+            z-index: 1;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -250,23 +257,44 @@
         function testAnchorPositioning() {
             try {
                 const floating = document.getElementById('floatingElement');
+                const anchor = document.getElementById('anchorElement');
                 const supportsAnchor = CSS.supports('top', 'anchor(top)');
 
                 if (supportsAnchor) {
                     showResult('anchorPositioningResult', '✔ CSS Anchor Positioning이 지원됩니다.', true);
+
+                    // 기준 요소에 anchor-name 설정
+                    anchor.style.anchorName = '--anchor-element';
+
+                    // floating 요소를 기준 요소 아래 중앙에 위치시키기
                     floating.style.display = 'block';
                     floating.style.position = 'absolute';
-                    floating.style.top = 'anchor(bottom)';
-                    floating.style.left = 'anchor(left)';
+                    floating.style.top = 'anchor(--anchor-element bottom)';
+                    floating.style.left = 'anchor(--anchor-element center)';
+                    floating.style.transform = 'translateX(-65%)'; // 중앙 정렬을 위해 X축으로 -50% 이동
                     floating.style.backgroundColor = '#27ae60';
-                } else {
+                    floating.style.marginTop = '10px'; // 약간의 간격 추가
+
+                    // 애니메이션 효과 추가
+                    floating.style.transition = 'all 0.3s ease';
+                    floating.style.opacity = '0';
+
+                    setTimeout(() => {
+                        floating.style.opacity = '1';
+                    }, 100);
+
+                                } else {
                     showResult('anchorPositioningResult', '✖ CSS Anchor Positioning이 지원되지 않습니다.', false);
+
+                    // 지원되지 않을 때는 floating 요소를 숨김
                     floating.style.display = 'none';
-                    floating.style.backgroundColor = '#8e44ad';
                 }
-            } catch (e) {
+                        } catch (e) {
                 showResult('anchorPositioningResult', `오류 발생: ${e.message}`, false);
                 console.error('testAnchorPositioning error:', e);
+
+                // 오류 시에도 floating 요소를 숨김
+                floating.style.display = 'none';
             }
         }
 
