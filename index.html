@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chromium Feature Test - Final Revision</title>
+    <title>Chromium Feature Test - Final Revision with Chrome 129+ Features</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f7f6; color: #333; }
         h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
@@ -52,14 +52,76 @@
             white-space: nowrap;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
+
+        /* New feature-specific styles */
+        .writing-mode-demo {
+            border: 1px solid #9b59b6;
+            padding: 10px;
+            width: 80px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            word-break: keep-all; /* Preserve words */
+            text-orientation: mixed; /* Default for horizontal-tb etc */
+        }
+        .font-variant-emoji-demo {
+            font-size: 3em;
+            margin-top: 10px;
+        }
+        .details-demo-container details {
+            border: 1px solid #1abc9c;
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #ecf0f1;
+        }
+        .details-demo-container summary {
+            background-color: #1abc9c;
+            color: white;
+            padding: 8px;
+            cursor: pointer;
+            list-style: none; /* Hide default arrow */
+        }
+        .details-demo-container summary::marker { display: none; } /* Newer way to hide arrow */
+        .details-demo-content {
+            padding: 10px;
+            background-color: #f8fcfb;
+            border-top: 1px dashed #aed6c9;
+        }
+        /* New style for Chrome 135+ Details test */
+        .details-grid-demo {
+            border: 2px dashed #e74c3c;
+            padding: 10px;
+        }
+        .details-grid-demo summary {
+            border: 1px solid #e74c3c;
+            padding: 5px;
+            cursor: pointer;
+            list-style: none;
+            background-color: #fce4d4;
+            color: #c0392b;
+        }
+        .details-grid-demo summary::marker { display: none; }
+        .details-grid-demo .grid-items {
+            display: none; /* Hidden by default */
+            padding: 10px;
+            border-top: 1px dashed #e74c3c;
+        }
+        .details-grid-item {
+            border: 1px solid #e74c3c;
+            padding: 5px;
+            text-align: center;
+            background-color: #fdd8cc;
+        }
     </style>
 </head>
 <body>
-    <h1>Chromium 기능 지원 테스트 (최종 개정판)</h1>
-    <p>아래 버튼을 클릭하여 각 기능의 지원 여부를 확인하세요. 문제가 발생하면 **개발자 도구 (F12) 콘솔**을 확인하고 오류 메시지를 알려주세요.</p>
+    <h1>Chromium 버전 기능 검증 </h1>
+    <p>아래 버튼을 클릭하여 각 기능의 지원 여부를 확인하여 Chromium 버전을 확인하세요. </p>
 
     <div class="feature-section">
-        <h2>1. View Transitions API (Chrome 111+)</h2>
+        <h2>1. View Transitions API (Chrome 111+ : 2023년 3월)</h2>
         <button class="test-button" id="viewTransitionsBtn">View Transitions 테스트</button>
         <div id="viewTransitionsResult" class="result"></div>
         <div id="viewTransitionsDemo" class="demo-output">
@@ -69,7 +131,7 @@
     </div>
 
     <div class="feature-section">
-        <h2>2. CSS color-mix() 함수 (Chrome 111+)</h2>
+        <h2>2. CSS color-mix() 함수 (Chrome 111+ : 2023년 3월)</h2>
         <button class="test-button" id="colorMixBtn">color-mix() 테스트</button>
         <div id="colorMixResult" class="result"></div>
         <div id="colorMixDemo" class="demo-output">
@@ -79,23 +141,14 @@
     </div>
 
     <div class="feature-section">
-        <h2>3. WebGPU API (Chrome 113+)</h2>
+        <h2>3. WebGPU API (Chrome 113+ : 2023년 5월)</h2>
         <button class="test-button" id="webGPUBtn">WebGPU 테스트</button>
         <div id="webGPUResult" class="result"></div>
     </div>
 
-    <div class="feature-section">
-        <h2>4. Popover API (Chrome 114+, stable in 127+)</h2>
-        <button class="test-button" id="popoverTargetBtn" popovertarget="my-popover">나를 클릭해서 팝오버 보기</button>
-        <div id="popoverResult" class="result"></div>
-        <div id="my-popover" popover>
-            <p>이것은 팝오버입니다!</p>
-            <button onclick="document.getElementById('my-popover').hidePopover()">닫기</button>
-        </div>
-    </div>
 
     <div class="feature-section">
-        <h2>5. CSS light-dark() 함수 (Chrome 121+)</h2>
+        <h2>4. CSS light-dark() 함수 (Chrome 121+ : 2024년 1월)</h2>
         <button class="test-button" id="lightDarkBtn">light-dark() 테스트</button>
         <div id="lightDarkResult" class="result"></div>
         <div id="lightDarkDemo" class="demo-output">
@@ -105,13 +158,81 @@
     </div>
 
     <div class="feature-section">
-        <h2>6. CSS Anchor Positioning (Chrome 125+)</h2>
+        <h2>5. CSS Anchor Positioning (Chrome 125+ : 2024년 5월)</h2>
         <div id="anchorContainer">
             <div id="anchorElement">기준 요소</div>
             <div id="floatingElement">나는 기준 요소의 아래에 고정될 거야!</div>
         </div>
         <button class="test-button" id="anchorPositioningBtn">Anchor Positioning 테스트</button>
         <div id="anchorPositioningResult" class="result"></div>
+    </div>
+
+    <div class="feature-section">
+        <h2>6. Popover API (Chrome 127+ : 2024년 7월)</h2>
+        <button class="test-button" id="popoverTargetBtn" popovertarget="my-popover">여기를 클릭해서 팝오버 보기</button>
+        <div id="popoverResult" class="result"></div>
+        <div id="my-popover" popover>
+            <p>이것은 팝오버입니다!</p>
+            <button onclick="document.getElementById('my-popover').hidePopover()">닫기</button>
+        </div>
+    </div>
+
+
+    <div class="feature-section">
+        <h2>7. CSS `writing-mode` (e.g., `sideways-rl`) (Chrome 129+ : 2024년 9월)</h2>
+        <p>새로운 쓰기 모드 `sideways-rl` 지원 여부를 테스트합니다. 텍스트가 오른쪽에서 왼쪽으로 세로로 배치됩니다.</p>
+        <button class="test-button" id="writingModeBtn">writing-mode 테스트</button>
+        <div id="writingModeResult" class="result"></div>
+        <div id="writingModeDemo" class="demo-output">
+            <div id="writingModeBox" class="writing-mode-demo">새로운 쓰기 모드 테스트</div>
+            <p>텍스트가 세로로 오른쪽에서 왼쪽으로 쓰여지면 지원됩니다.</p>
+        </div>
+    </div>
+
+    <div class="feature-section">
+        <h2>8. CSS `font-variant-emoji` (Chrome 129+ : 2024년 9월)</h2>
+        <p>이모티콘 렌더링 변형을 제어하는 속성 지원 여부를 테스트합니다. (예: 텍스트 스타일 이모티콘)</p>
+        <button class="test-button" id="fontVariantEmojiBtn">font-variant-emoji 테스트</button>
+        <div id="fontVariantEmojiResult" class="result"></div>
+        <div id="fontVariantEmojiDemo" class="demo-output">
+            <p>테스트할 이모티콘: <span id="emojiTestSpan">😄</span></p>
+            <p>클릭 시 이모티콘의 시각적 스타일이 변경되면 지원됩니다.</p>
+        </div>
+    </div>
+
+    <div class="feature-section">
+        <h2>9. CSS `details` 요소 스타일링 개선 (Chrome 131+ : 2024년 11월)</h2>
+        <p>`details` 및 `summary` 요소에 `display` 속성 등을 사용하여 스타일링 유연성 향상 여부를 테스트합니다.</p>
+        <button class="test-button" id="detailsStylingBtn">Details 스타일링 테스트</button>
+        <div id="detailsStylingResult" class="result"></div>
+        <div id="detailsStylingDemo" class="demo-output details-demo-container">
+            <details id="styledDetails">
+                <summary id="styledSummary">이것은 스타일링된 요약입니다.</summary>
+                <div id="detailsContent" class="details-demo-content">
+                    <p>상세 내용입니다. 여기에 스타일이 적용되는지 확인합니다.</p>
+                    <p>CSS `display: grid;` 또는 `block;` 적용 여부.</p>
+                </div>
+            </details>
+            <p>클릭 시 요약과 내용이 특정 스타일 (예: 그리드 레이아웃)로 변경되면 지원됩니다.</p>
+        </div>
+    </div>
+
+    <div class="feature-section">
+        <h2>10. CSS 'details' 및 'summary'의 display: grid 완전 지원 (Chrome 135+ : 2025년 3월)</h2>
+        <p>이전 버전에서는 제한적이었던 'summary' 및 'details' 요소에 display: grid를 적용하고 레이아웃이 정상적으로 작동하는지 확인합니다.</p>
+        <button class="test-button" id="detailsGridBtn">Details Grid 테스트</button>
+        <div id="detailsGridResult" class="result"></div>
+        <div id="detailsGridDemo" class="demo-output">
+            <details id="detailsGridTest" class="details-grid-demo">
+                <summary id="detailsGridSummary">그리드 요약</summary>
+                <div id="detailsGridContent" class="grid-items">
+                    <div class="details-grid-item">그리드 아이템 1</div>
+                    <div class="details-grid-item">그리드 아이템 2</div>
+                    <div class="details-grid-item">그리드 아이템 3</div>
+                </div>
+            </details>
+            <p>클릭 시 요약과 내용이 그리드처럼 배열되면 지원됩니다.</p>
+        </div>
     </div>
 
     <script>
@@ -126,7 +247,7 @@
             console.log(`[${id}] Result: ${message}`);
         }
 
-        // --- 테스트 함수들 ---
+        // --- 기존 테스트 함수들 ---
 
         function testViewTransitions() {
             try {
@@ -147,41 +268,33 @@
             }
         }
 
-                // CSS color-mix() 함수 (Chrome 111+) - 수정된 버전
         function testColorMix() {
             try {
                 const testBox = document.getElementById('colorMixTestBox');
                 const computedColorValueSpan = document.getElementById('computedColorValue');
 
-                // 1단계: CSS.supports()를 사용하여 문법 지원 여부 확인
                 const supportsColorMixSyntax = CSS.supports('background-color', 'color-mix(in srgb, red 80%, blue 20%)');
 
                 if (!supportsColorMixSyntax) {
                     showResult('colorMixResult', '✖ color-mix() 함수 문법이 지원되지 않습니다.', false);
                     computedColorValueSpan.textContent = 'N/A (문법 미지원)';
-                    // 지원되지 않을 때는 기본 색상으로 설정
                     testBox.style.backgroundColor = '#ecf0f1';
                     return;
                 }
 
-                // color-mix 효과를 적용하고 유지
                 testBox.style.backgroundColor = 'color-mix(in srgb, red 80%, blue 20%)';
 
-                // 잠시 기다린 후 계산된 색상 확인 (브라우저가 색상을 계산할 시간을 줌)
                 setTimeout(() => {
                     const computedColor = getComputedStyle(testBox).backgroundColor;
                     computedColorValueSpan.textContent = computedColor;
 
-                    // 2단계: 실제로 색상이 혼합되었는지 확인
                     if (computedColor.startsWith('rgb(') || computedColor.startsWith('rgba(') || computedColor.startsWith('color(srgb')) {
-                        // RGB 값이 예상 범위 내에 있는지 확인 (빨강+파랑 혼합이므로 R값이 높고 B값이 중간 정도)
                         const rgbMatch = computedColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
                         if (rgbMatch) {
                             const r = parseInt(rgbMatch[1]);
                             const g = parseInt(rgbMatch[2]);
                             const b = parseInt(rgbMatch[3]);
 
-                            // 빨강 80% + 파랑 20% 혼합의 예상 범위 (R: 200-255, G: 0-50, B: 50-100)
                             if (r > 180 && g < 60 && b > 40 && b < 120) {
                                 showResult('colorMixResult', '✔ color-mix() 함수가 지원되며, 정상적으로 적용되었습니다.', true);
                             } else {
@@ -192,7 +305,6 @@
                         }
                     } else {
                         showResult('colorMixResult', `✖ color-mix() 함수는 문법적으로 지원되지만, 실제 적용되지 않았습니다. (계산된 값: ${computedColor})`, false);
-                        // 실패 시 기본 색상으로 설정
                         testBox.style.backgroundColor = '#ecf0f1';
                     }
                 }, 100);
@@ -200,7 +312,6 @@
             } catch (e) {
                 showResult('colorMixResult', `오류 발생: ${e.message}`, false);
                 console.error('testColorMix error:', e);
-                // 오류 시 기본 색상으로 설정
                 testBox.style.backgroundColor = '#ecf0f1';
             }
         }
@@ -247,7 +358,7 @@
                 } else {
                     showResult('lightDarkResult', `✖ light-dark() 함수가 지원되지 않거나 예상과 다릅니다: ${computedColor}`, false);
                 }
-                themeBox.style.backgroundColor = originalStyle; // 원래 스타일로 복원
+                themeBox.style.backgroundColor = originalStyle;
             } catch (e) {
                 showResult('lightDarkResult', `오류 발생: ${e.message}`, false);
                 console.error('testLightDark error:', e);
@@ -263,19 +374,16 @@
                 if (supportsAnchor) {
                     showResult('anchorPositioningResult', '✔ CSS Anchor Positioning이 지원됩니다.', true);
 
-                    // 기준 요소에 anchor-name 설정
                     anchor.style.anchorName = '--anchor-element';
 
-                    // floating 요소를 기준 요소 아래 중앙에 위치시키기
                     floating.style.display = 'block';
                     floating.style.position = 'absolute';
                     floating.style.top = 'anchor(--anchor-element bottom)';
                     floating.style.left = 'anchor(--anchor-element center)';
-                    floating.style.transform = 'translateX(-65%)'; // 중앙 정렬을 위해 X축으로 -50% 이동
+                    floating.style.transform = 'translateX(-65%)';
                     floating.style.backgroundColor = '#27ae60';
-                    floating.style.marginTop = '10px'; // 약간의 간격 추가
+                    floating.style.marginTop = '10px';
 
-                    // 애니메이션 효과 추가
                     floating.style.transition = 'all 0.3s ease';
                     floating.style.opacity = '0';
 
@@ -283,31 +391,230 @@
                         floating.style.opacity = '1';
                     }, 100);
 
-                                } else {
+                } else {
                     showResult('anchorPositioningResult', '✖ CSS Anchor Positioning이 지원되지 않습니다.', false);
-
-                    // 지원되지 않을 때는 floating 요소를 숨김
                     floating.style.display = 'none';
                 }
-                        } catch (e) {
+            } catch (e) {
                 showResult('anchorPositioningResult', `오류 발생: ${e.message}`, false);
                 console.error('testAnchorPositioning error:', e);
-
-                // 오류 시에도 floating 요소를 숨김
                 floating.style.display = 'none';
             }
         }
 
+        // --- Chrome 129+ New Test Functions ---
+
+        function testWritingMode() {
+            try {
+                const testBox = document.getElementById('writingModeBox');
+                const originalWritingMode = testBox.style.writingMode;
+
+                const supportsSidewaysRl = CSS.supports('writing-mode', 'sideways-rl');
+
+                if (supportsSidewaysRl) {
+                    testBox.style.writingMode = 'sideways-rl';
+                    const computedWritingMode = getComputedStyle(testBox).writingMode;
+
+                    if (computedWritingMode === 'sideways-rl') {
+                        showResult('writingModeResult', '✔ CSS `writing-mode: sideways-rl`이 지원됩니다.', true);
+                        testBox.style.color = '#9b59b6';
+                    } else {
+                        showResult('writingModeResult', `✖ CSS \`writing-mode: sideways-rl\` 문법은 지원되나, 실제 적용되지 않았습니다. (계산된 값: ${computedWritingMode})`, false);
+                        testBox.style.color = '#333';
+                    }
+                } else {
+                    showResult('writingModeResult', '✖ CSS `writing-mode: sideways-rl`이 지원되지 않습니다.', false);
+                    testBox.style.color = '#333';
+                }
+                testBox.style.writingMode = originalWritingMode;
+            } catch (e) {
+                showResult('writingModeResult', `오류 발생: ${e.message}`, false);
+                console.error('testWritingMode error:', e);
+            }
+        }
+
+        function testFontVariantEmoji() {
+            try {
+                const emojiSpan = document.getElementById('emojiTestSpan');
+                const originalFontVariantEmoji = emojiSpan.style.fontVariantEmoji;
+
+                const supportsFontVariantEmoji = CSS.supports('font-variant-emoji', 'text');
+
+                if (supportsFontVariantEmoji) {
+                    emojiSpan.style.fontVariantEmoji = 'text';
+                    const computedFontVariantEmoji = getComputedStyle(emojiSpan).fontVariantEmoji;
+
+                    if (computedFontVariantEmoji === 'text') {
+                        showResult('fontVariantEmojiResult', '✔ CSS `font-variant-emoji: text`가 지원됩니다.', true);
+                        emojiSpan.style.fontSize = '3.2em';
+                    } else {
+                        showResult('fontVariantEmojiResult', `✖ CSS \`font-variant-emoji: text\` 문법은 지원되나, 실제 적용되지 않았습니다. (계산된 값: ${computedFontVariantEmoji})`, false);
+                        emojiSpan.style.fontSize = '3em';
+                    }
+                } else {
+                    showResult('fontVariantEmojiResult', '✖ CSS `font-variant-emoji`이 지원되지 않습니다.', false);
+                    emojiSpan.style.fontSize = '3em';
+                }
+                emojiSpan.style.fontVariantEmoji = originalFontVariantEmoji;
+            } catch (e) {
+                showResult('fontVariantEmojiResult', `오류 발생: ${e.message}`, false);
+                console.error('testFontVariantEmoji error:', e);
+            }
+        }
+
+        function testDetailsStyling() {
+            try {
+                const styledSummary = document.getElementById('styledSummary');
+                const detailsContent = document.getElementById('detailsContent');
+
+                const supportsSummaryGrid = CSS.supports('display', 'grid') && CSS.supports('-webkit-details-display', 'block');
+                const supportsDetailsContentBlock = CSS.supports('display', 'block');
+
+                let supportedCount = 0;
+                let messages = [];
+
+                if (supportsSummaryGrid) {
+                    styledSummary.style.display = 'grid';
+                    if (getComputedStyle(styledSummary).display === 'grid') {
+                        messages.push('✔ `<summary>`에 `display: grid`가 적용됩니다.');
+                        supportedCount++;
+                        styledSummary.style.backgroundColor = '#2ecc71';
+                    } else {
+                        messages.push('✖ `<summary>`에 `display: grid` 문법은 지원되나, 적용되지 않습니다.');
+                        styledSummary.style.backgroundColor = '#1abc9c';
+                    }
+                } else {
+                    messages.push('✖ `<summary>`에 `display: grid` 문법이 지원되지 않습니다.');
+                    styledSummary.style.backgroundColor = '#1abc9c';
+                }
+
+                if (supportsDetailsContentBlock) {
+                    detailsContent.style.display = 'block';
+                    if (getComputedStyle(detailsContent).display === 'block') {
+                        messages.push('✔ `<details>` 내용에 `display: block`이 적용됩니다.');
+                        supportedCount++;
+                        detailsContent.style.backgroundColor = '#e0ffe0';
+                    } else {
+                        messages.push('✖ `<details>` 내용에 `display: block` 문법은 지원되나, 적용되지 않습니다.');
+                        detailsContent.style.backgroundColor = '#f8fcfb';
+                    }
+                } else {
+                    messages.push('✖ `<details>` 내용에 `display: block` 문법이 지원되지 않습니다.');
+                    detailsContent.style.backgroundColor = '#f8fcfb';
+                }
+
+                if (supportedCount === 2) {
+                    showResult('detailsStylingResult', '✔ `<details>` 요소 스타일링 개선 기능이 모두 지원됩니다.', true);
+                } else if (supportedCount > 0) {
+                   showResult('detailsStylingResult', '✔ `<details>` 요소 스타일링 개선 기능이 모두 지원됩니다.', true);
+                } else {
+                    showResult('detailsStylingResult', '✖ `<details>` 요소 스타일링 개선 기능이 전혀 지원되지 않습니다. ' + messages.join(', '), false);
+                }
+
+            } catch (e) {
+                showResult('detailsStylingResult', `오류 발생: ${e.message}`, false);
+                console.error('testDetailsStyling error:', e);
+            }
+        }
+
+        // --- Chrome 135+ New Test Function ---
+
+        function testDetailsGrid() {
+            try {
+                const summary = document.getElementById('detailsGridSummary');
+                const content = document.getElementById('detailsGridContent');
+                const detailsElement = document.getElementById('detailsGridTest');
+
+                // Try applying display: grid directly to summary
+                const supportsSummaryDirectGrid = CSS.supports('display', 'grid');
+                let summaryGridApplied = false;
+
+                if (supportsSummaryDirectGrid) {
+                    summary.style.display = 'grid';
+                    summary.style.gridTemplateColumns = '1fr auto';
+                    summary.style.alignItems = 'center';
+
+                    if (getComputedStyle(summary).display === 'grid') {
+                        summaryGridApplied = true;
+                        summary.style.backgroundColor = '#a7e9af'; // Visual cue for success
+                    } else {
+                         summary.style.backgroundColor = '#fce4d4'; // Visual cue for failure
+                    }
+                }
+
+                // Check if the content part can also become a grid
+                const supportsContentGrid = CSS.supports('display', 'grid');
+                let contentGridApplied = false;
+
+                if (supportsContentGrid) {
+                    content.style.display = 'grid';
+                    content.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                    content.style.gap = '5px';
+
+                    if (getComputedStyle(content).display === 'grid') {
+                        contentGridApplied = true;
+                        content.style.backgroundColor = '#e6ffe6'; // Visual cue for success
+                    } else {
+                         content.style.backgroundColor = '#f0f0f0'; // Visual cue for failure
+                    }
+                }
+
+                // Show content if any grid applied or if details is open
+                if (detailsElement.open || summaryGridApplied || contentGridApplied) {
+                    content.style.display = contentGridApplied ? 'grid' : 'block'; // Ensure it's visible if grid is applied, or fallback to block
+                }
+
+                if (summaryGridApplied && contentGridApplied) {
+                    showResult('detailsGridResult', '✔ `<details>` 및 `<summary>`에 `display: grid`가 완전히 지원됩니다.', true);
+                } else if (summaryGridApplied || contentGridApplied) {
+                    showResult('detailsGridResult', '⚠ `<details>` 및 `<summary>`의 `display: grid` 기능 중 일부만 지원됩니다. (요약: ' + (summaryGridApplied ? '성공' : '실패') + ', 내용: ' + (contentGridApplied ? '성공' : '실패') + ')', false);
+                } else {
+                    showResult('detailsGridResult', '✖ `<details>` 및 `<summary>`에 `display: grid`가 지원되지 않습니다.', false);
+                    content.style.display = 'none'; // Hide if not supported
+                }
+
+                // Reset after a delay for demonstration
+                setTimeout(() => {
+                    summary.style.display = ''; // Reset to default or initial state
+                    summary.style.gridTemplateColumns = '';
+                    summary.style.alignItems = '';
+                    summary.style.backgroundColor = ''; // Reset visual cue
+
+                    content.style.display = 'none'; // Hide content again for next test
+                    content.style.gridTemplateColumns = '';
+                    content.style.gap = '';
+                    content.style.backgroundColor = ''; // Reset visual cue
+                }, 2000); // Reset after 2 seconds
+
+            } catch (e) {
+                showResult('detailsGridResult', `오류 발생: ${e.message}`, false);
+                console.error('testDetailsGrid error:', e);
+                const content = document.getElementById('detailsGridContent');
+                if (content) content.style.display = 'none';
+            }
+        }
+
+
         // --- 이벤트 리스너 등록 ---
         document.addEventListener('DOMContentLoaded', () => {
+            // 기존 기능 버튼 리스너
             document.getElementById('viewTransitionsBtn').addEventListener('click', testViewTransitions);
             document.getElementById('colorMixBtn').addEventListener('click', testColorMix);
             document.getElementById('webGPUBtn').addEventListener('click', testWebGPU);
             document.getElementById('lightDarkBtn').addEventListener('click', testLightDark);
             document.getElementById('anchorPositioningBtn').addEventListener('click', testAnchorPositioning);
 
+            // Chrome 129+ 새 기능 버튼 리스너
+            document.getElementById('writingModeBtn').addEventListener('click', testWritingMode);
+            document.getElementById('fontVariantEmojiBtn').addEventListener('click', testFontVariantEmoji);
+            document.getElementById('detailsStylingBtn').addEventListener('click', testDetailsStyling);
+
+            // Chrome 135+ 새 기능 버튼 리스너
+            document.getElementById('detailsGridBtn').addEventListener('click', testDetailsGrid);
+
+            // 초기 로드 시 자동 확인 기능
             checkPopoverAPI();
-            testLightDark(); // light-dark는 시스템 테마에 따라 달라지므로 초기에도 확인
+            testLightDark();
 
             const lazyLoadingImg = document.querySelector('.lazy-img');
             if (lazyLoadingImg && 'loading' in lazyLoadingImg) {
