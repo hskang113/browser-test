@@ -70,50 +70,7 @@
             font-size: 3em;
             margin-top: 10px;
         }
-        .details-demo-container details {
-            border: 1px solid #1abc9c;
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #ecf0f1;
-        }
-        .details-demo-container summary {
-            background-color: #1abc9c;
-            color: white;
-            padding: 8px;
-            cursor: pointer;
-            list-style: none; /* Hide default arrow */
-        }
-        .details-demo-container summary::marker { display: none; } /* Newer way to hide arrow */
-        .details-demo-content {
-            padding: 10px;
-            background-color: #f8fcfb;
-            border-top: 1px dashed #aed6c9;
-        }
-        /* New style for Chrome 135+ Details test */
-        .details-grid-demo {
-            border: 2px dashed #e74c3c;
-            padding: 10px;
-        }
-        .details-grid-demo summary {
-            border: 1px solid #e74c3c;
-            padding: 5px;
-            cursor: pointer;
-            list-style: none;
-            background-color: #fce4d4;
-            color: #c0392b;
-        }
-        .details-grid-demo summary::marker { display: none; }
-        .details-grid-demo .grid-items {
-            display: none; /* Hidden by default */
-            padding: 10px;
-            border-top: 1px dashed #e74c3c;
-        }
-        .details-grid-item {
-            border: 1px solid #e74c3c;
-            padding: 5px;
-            text-align: center;
-            background-color: #fdd8cc;
-        }
+
     </style>
 </head>
 <body>
@@ -200,40 +157,7 @@
         </div>
     </div>
 
-    <div class="feature-section">
-        <h2>9. CSS `details` 요소 스타일링 개선 (Chrome 131+ : 2024년 11월)</h2>
-        <p>`details` 및 `summary` 요소에 `display` 속성 등을 사용하여 스타일링 유연성 향상 여부를 테스트합니다.</p>
-        <button class="test-button" id="detailsStylingBtn">Details 스타일링 테스트</button>
-        <div id="detailsStylingResult" class="result"></div>
-        <div id="detailsStylingDemo" class="demo-output details-demo-container">
-            <details id="styledDetails">
-                <summary id="styledSummary">이것은 스타일링된 요약입니다.</summary>
-                <div id="detailsContent" class="details-demo-content">
-                    <p>상세 내용입니다. 여기에 스타일이 적용되는지 확인합니다.</p>
-                    <p>CSS `display: grid;` 또는 `block;` 적용 여부.</p>
-                </div>
-            </details>
-            <p>클릭 시 요약과 내용이 특정 스타일 (예: 그리드 레이아웃)로 변경되면 지원됩니다.</p>
-        </div>
-    </div>
 
-    <div class="feature-section">
-        <h2>10. CSS 'details' 및 'summary'의 display: grid 완전 지원 (Chrome 135+ : 2025년 3월)</h2>
-        <p>이전 버전에서는 제한적이었던 'summary' 및 'details' 요소에 display: grid를 적용하고 레이아웃이 정상적으로 작동하는지 확인합니다.</p>
-        <button class="test-button" id="detailsGridBtn">Details Grid 테스트</button>
-        <div id="detailsGridResult" class="result"></div>
-        <div id="detailsGridDemo" class="demo-output">
-            <details id="detailsGridTest" class="details-grid-demo">
-                <summary id="detailsGridSummary">그리드 요약</summary>
-                <div id="detailsGridContent" class="grid-items">
-                    <div class="details-grid-item">그리드 아이템 1</div>
-                    <div class="details-grid-item">그리드 아이템 2</div>
-                    <div class="details-grid-item">그리드 아이템 3</div>
-                </div>
-            </details>
-            <p>클릭 시 요약과 내용이 그리드처럼 배열되면 지원됩니다.</p>
-        </div>
-    </div>
 
     <script>
         function showResult(id, message, isSupported) {
@@ -462,137 +386,7 @@
             }
         }
 
-        function testDetailsStyling() {
-            try {
-                const styledSummary = document.getElementById('styledSummary');
-                const detailsContent = document.getElementById('detailsContent');
 
-                const supportsSummaryGrid = CSS.supports('display', 'grid') && CSS.supports('-webkit-details-display', 'block');
-                const supportsDetailsContentBlock = CSS.supports('display', 'block');
-
-                let supportedCount = 0;
-                let messages = [];
-
-                if (supportsSummaryGrid) {
-                    styledSummary.style.display = 'grid';
-                    if (getComputedStyle(styledSummary).display === 'grid') {
-                        messages.push('✔ `<summary>`에 `display: grid`가 적용됩니다.');
-                        supportedCount++;
-                        styledSummary.style.backgroundColor = '#2ecc71';
-                    } else {
-                        messages.push('✖ `<summary>`에 `display: grid` 문법은 지원되나, 적용되지 않습니다.');
-                        styledSummary.style.backgroundColor = '#1abc9c';
-                    }
-                } else {
-                    messages.push('✖ `<summary>`에 `display: grid` 문법이 지원되지 않습니다.');
-                    styledSummary.style.backgroundColor = '#1abc9c';
-                }
-
-                if (supportsDetailsContentBlock) {
-                    detailsContent.style.display = 'block';
-                    if (getComputedStyle(detailsContent).display === 'block') {
-                        messages.push('✔ `<details>` 내용에 `display: block`이 적용됩니다.');
-                        supportedCount++;
-                        detailsContent.style.backgroundColor = '#e0ffe0';
-                    } else {
-                        messages.push('✖ `<details>` 내용에 `display: block` 문법은 지원되나, 적용되지 않습니다.');
-                        detailsContent.style.backgroundColor = '#f8fcfb';
-                    }
-                } else {
-                    messages.push('✖ `<details>` 내용에 `display: block` 문법이 지원되지 않습니다.');
-                    detailsContent.style.backgroundColor = '#f8fcfb';
-                }
-
-                if (supportedCount === 2) {
-                    showResult('detailsStylingResult', '✔ `<details>` 요소 스타일링 개선 기능이 모두 지원됩니다.', true);
-                } else if (supportedCount > 0) {
-                   showResult('detailsStylingResult', '✔ `<details>` 요소 스타일링 개선 기능이 모두 지원됩니다.', true);
-                } else {
-                    showResult('detailsStylingResult', '✖ `<details>` 요소 스타일링 개선 기능이 전혀 지원되지 않습니다. ' + messages.join(', '), false);
-                }
-
-            } catch (e) {
-                showResult('detailsStylingResult', `오류 발생: ${e.message}`, false);
-                console.error('testDetailsStyling error:', e);
-            }
-        }
-
-        // --- Chrome 135+ New Test Function ---
-
-        function testDetailsGrid() {
-            try {
-                const summary = document.getElementById('detailsGridSummary');
-                const content = document.getElementById('detailsGridContent');
-                const detailsElement = document.getElementById('detailsGridTest');
-
-                // Try applying display: grid directly to summary
-                const supportsSummaryDirectGrid = CSS.supports('display', 'grid');
-                let summaryGridApplied = false;
-
-                if (supportsSummaryDirectGrid) {
-                    summary.style.display = 'grid';
-                    summary.style.gridTemplateColumns = '1fr auto';
-                    summary.style.alignItems = 'center';
-
-                    if (getComputedStyle(summary).display === 'grid') {
-                        summaryGridApplied = true;
-                        summary.style.backgroundColor = '#a7e9af'; // Visual cue for success
-                    } else {
-                         summary.style.backgroundColor = '#fce4d4'; // Visual cue for failure
-                    }
-                }
-
-                // Check if the content part can also become a grid
-                const supportsContentGrid = CSS.supports('display', 'grid');
-                let contentGridApplied = false;
-
-                if (supportsContentGrid) {
-                    content.style.display = 'grid';
-                    content.style.gridTemplateColumns = 'repeat(3, 1fr)';
-                    content.style.gap = '5px';
-
-                    if (getComputedStyle(content).display === 'grid') {
-                        contentGridApplied = true;
-                        content.style.backgroundColor = '#e6ffe6'; // Visual cue for success
-                    } else {
-                         content.style.backgroundColor = '#f0f0f0'; // Visual cue for failure
-                    }
-                }
-
-                // Show content if any grid applied or if details is open
-                if (detailsElement.open || summaryGridApplied || contentGridApplied) {
-                    content.style.display = contentGridApplied ? 'grid' : 'block'; // Ensure it's visible if grid is applied, or fallback to block
-                }
-
-                if (summaryGridApplied && contentGridApplied) {
-                    showResult('detailsGridResult', '✔ `<details>` 및 `<summary>`에 `display: grid`가 완전히 지원됩니다.', true);
-                } else if (summaryGridApplied || contentGridApplied) {
-                    showResult('detailsGridResult', '⚠ `<details>` 및 `<summary>`의 `display: grid` 기능 중 일부만 지원됩니다. (요약: ' + (summaryGridApplied ? '성공' : '실패') + ', 내용: ' + (contentGridApplied ? '성공' : '실패') + ')', false);
-                } else {
-                    showResult('detailsGridResult', '✖ `<details>` 및 `<summary>`에 `display: grid`가 지원되지 않습니다.', false);
-                    content.style.display = 'none'; // Hide if not supported
-                }
-
-                // Reset after a delay for demonstration
-                setTimeout(() => {
-                    summary.style.display = ''; // Reset to default or initial state
-                    summary.style.gridTemplateColumns = '';
-                    summary.style.alignItems = '';
-                    summary.style.backgroundColor = ''; // Reset visual cue
-
-                    content.style.display = 'none'; // Hide content again for next test
-                    content.style.gridTemplateColumns = '';
-                    content.style.gap = '';
-                    content.style.backgroundColor = ''; // Reset visual cue
-                }, 2000); // Reset after 2 seconds
-
-            } catch (e) {
-                showResult('detailsGridResult', `오류 발생: ${e.message}`, false);
-                console.error('testDetailsGrid error:', e);
-                const content = document.getElementById('detailsGridContent');
-                if (content) content.style.display = 'none';
-            }
-        }
 
 
         // --- 이벤트 리스너 등록 ---
@@ -607,10 +401,6 @@
             // Chrome 129+ 새 기능 버튼 리스너
             document.getElementById('writingModeBtn').addEventListener('click', testWritingMode);
             document.getElementById('fontVariantEmojiBtn').addEventListener('click', testFontVariantEmoji);
-            document.getElementById('detailsStylingBtn').addEventListener('click', testDetailsStyling);
-
-            // Chrome 135+ 새 기능 버튼 리스너
-            document.getElementById('detailsGridBtn').addEventListener('click', testDetailsGrid);
 
             // 초기 로드 시 자동 확인 기능
             checkPopoverAPI();
